@@ -1,8 +1,21 @@
 from selenium import webdriver
+import unittest
 
-browser = webdriver.Firefox()
-browser.get('http://localhost:8000')
+SITE_URL='http://localhost:8000'
 
-assert 'To-Do' in browser.title, "Browser title was: " + browser.title
+class NewVisitorTest(unittest.TestCase):
+  
+  def setUp(self):
+    self.browser = webdriver.Firefox()
 
-browser.quit()
+  def tearDown(self):
+    self.browser.quit()
+
+  def test_start_list(self):
+    self.browser.get(SITE_URL)
+    self.assertIn('To-Do', self.browser.title)
+    self.fail('Finish the test!')
+
+if __name__ == '__main__':
+  unittest.main(warnings='ignore')
+
