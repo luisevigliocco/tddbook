@@ -1,7 +1,18 @@
+#!/usr/bin/env python3
 from selenium import webdriver
 import unittest
+import sys
+import os
 
-SITE_URL='http://localhost:8000'
+
+variable_name = "TEST_URL"
+
+if len(sys.argv) == 2:
+  SITE_URL = 'http://' + sys.argv[1]
+elif variable_name in os.environ:
+  SITE_URL = os.environ[variable_name]
+else:
+  SITE_URL='http://localhost:8000'
 
 class NewVisitorTest(unittest.TestCase):
   
